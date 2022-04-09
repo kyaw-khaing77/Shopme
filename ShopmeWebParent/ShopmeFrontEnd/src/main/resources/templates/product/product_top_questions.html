@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+	<div class="row"><div class="col"><hr/></div></div>
+	<div class="row m-1">
+		<h3 id="question">Questions & Answers for this product:</h3>
+	</div>		
+	
+    <div th:replace="questions/questions_votes :: content"></div>		    
+		
+	<div class="row m-1 ml-3">
+		    <a th:href="@{'/questions/' + ${product.alias}}">View all [[${questionListSize}]] questions</a>
+		    &nbsp;
+		    
+		    <div th:unless="${canAskQuestion}">
+		       <button type="button" class="btn btn-secondary" id="cannotAskQuestion">Ask a Question</button>
+		    </div>
+	 </div>	
+	 
+	   <div th:if="${canAskQuestion}">
+	     <div class="row"><div class="col"><hr/></div></div>
+		       <form id="questionForm">
+		           <input type="hidden" th:value="${product.id}" id="productIdForQuestion" />
+                   
+	                  <div class="row ml-3">
+		                 <div class="col-sm">                                                                                
+				              <textarea rows="2" cols="5" id="questionContent" class="form-control" placeholder="Write a quesiton" required="required"></textarea>
+		                 </div>
+		                 <div class="col-sm ml-1 mt-3">
+							 <input type="submit" value="Ask Question" class="btn btn-primary" />       
+						</div>
+	                 </div>
+		       </form>
+	   </div>			
+	
+</div>
+</body>
+</html> 

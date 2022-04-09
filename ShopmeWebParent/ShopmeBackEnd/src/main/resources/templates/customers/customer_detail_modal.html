@@ -1,0 +1,112 @@
+<div class="modal-header">
+  <h4 class="modal-title">Customer Details</h4>
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+<div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item"><a class="nav-link active" data-toggle="tab"
+			href="#general" role="tab">General</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab"
+			href="#address" role="tab">Address</a></li>
+		
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div class="tab-pane active p-3" id="general" role="tabpanel">
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Customer ID</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:value="${customer.id}" readonly="readonly">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Full Name</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:value="${customer.fullName}" readonly="readonly">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">E-mail</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:value="${customer.email}" readonly="readonly">					
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Phone Number</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:value="${customer.phoneNumber}" readonly="readonly">					
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Enabled:</label>
+				<div class="col-sm-8">
+					<input type="checkbox" th:checked="${customer.enabled}" disabled="disabled">
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Created Time</label>
+				<div class="col-sm-8">
+					<span th:text="${#dates.format(customer.createdTime,'yyyy-MM-dd HH:MM:ss')}"></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="tab-pane p-3" id="address" role="tabpanel">
+		   <div class="form-group row">
+				<label class="col-form-label col-sm-4">Address Line1</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.addressLine1}" readonly="readonly">	
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Address Line2</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.addressLine2}" readonly="readonly">	
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">City</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.city}" readonly="readonly">	
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">State</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.state}" readonly="readonly">	
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Country</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.country.name}" readonly="readonly">	
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Postal Code</label>
+				<div class="col-sm-8">
+					 <input type="text" class="form-control" th:value="${customer.postalCode}" readonly="readonly">	
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>

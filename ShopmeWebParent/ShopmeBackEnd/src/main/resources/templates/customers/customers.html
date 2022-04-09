@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "fragments :: page_head('Users - Shopme Admin','none')" ></head>
+<body>
+	<div class="container-fluid">
+	    
+	    <div th:replace="navigation :: menu"></div> 
+
+		<div>
+			<h1>Manage Customers</h1>
+			
+			<a th:href="@{/customers/export/csv}"><span class="fas fa-file-csv fa-2x icon-dark mr-2"></span></a>	
+	
+		     <div th:replace="fragments :: search_form_and_message()"></div>
+
+			
+	   </div>	
+					
+			<div>
+				<table class="table table-bordered table-striped table-hover table-responsive-xl ">
+					<thead class="thead-dark">
+						<tr>
+                             <th>
+                               <th th:replace ="fragments :: column_link('id','ID','tag')" />
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('firstName','First Name','tag')" />
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('lastName','Last Name','tag')" />                            
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('email','Email','tag')" />                            
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('city','City','tag')" />                             
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('state','State','tag')" />                            
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('country','Country','tag')" />                            
+                             </th>
+                             <th>
+                               <th th:replace ="fragments :: column_link('enabled','Enabled','tag')" />                             
+                             </th>
+                             <th></th>          
+						</tr>
+					</thead>
+					<tbody>
+					<tr th:each="customer : ${listCustomers}">
+					  <td>[[${customer.id}]]</td>
+					  <td>[[${customer.firstName}]]</td>
+					  <td>[[${customer.lastName}]]</td>
+					  <td>[[${customer.email}]]</td>
+					  <td>[[${customer.city}]]</td>
+					  <td>[[${customer.state}]]</td>
+					  <td>[[${customer.country.name}]]</td>
+					  <td>
+		                 <div th:replace= "fragments :: status(${customer.enabled},'customer','/customers/'+${customer.id})"></div>        
+					  </td>
+					  <td>
+					     <a th:href="@{'/customers/detail/'+${customer.id}}" class="link-detail" title="View details of this customer">
+					     <span class="fas fa-file-alt fa-2x icon-green"></span></a>
+					      &nbsp;
+					     <div th:replace= "fragments :: edit('customer','/customers/edit/'+${customer.id})"></div> 
+                          &nbsp;
+                         <div th:replace= "fragments :: delete('customer',${customer.id},'/customers/delete/'+${customer.id},true)"></div> 
+
+					  </td>
+  				
+					
+					</tr>
+					</tbody>
+
+				</table>
+		</div>	
+		
+		<div class="modal fade" id="detailModal">
+		   <div class="modal-dialog modal-lg">
+		     <div class="modal-content">
+		     
+		     
+		     </div>
+		   
+		   </div>
+		
+		</div>
+		
+		<div th:replace="modal_fragment :: confirm_modal"> </div>	
+		
+		<div th:replace="fragments :: pagination('customers')"></div> 
+		
+        <div th:replace="fragments :: footer"></div> 
+</div>
+
+<script type="text/javascript">
+
+function clearFilter(){
+  window.location = "[[@{/customers}]]";
+}
+
+$(document).ready(function(){
+        
+    $(".link-delete").on("click",function(e){
+       e.preventDefault();
+       showDeleteConfirmModal($(this),'customer');
+    });
+    
+    $(".link-detail").on("click",function(e){
+       e.preventDefault();
+       linkDetailURL = $(this).attr("href");
+       $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    });
+
+});
+
+</script>
+<script th:src ="@{/js/common_list.js}"></script>
+</body>
+</html>

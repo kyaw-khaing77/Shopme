@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('My Question', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: header_menu"></div>
+	<div th:replace="navigation :: search_nav"></div>
+	<div class="text-center">
+		<h2>Questions Posted by me</h2>	
+	</div>
+
+	<div th:replace="fragments :: search_form"></div>
+
+		<div class="full-details">
+		<table class="table table-striped table-bordered table-hover table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
+					<th th:replace="fragments :: column_link('product', 'Product', 'none')" />
+					<th th:replace="fragments :: column_link('questionContent', 'Question', 'none')" />
+					<th th:replace="fragments :: column_link('askTime', 'Ask Time', 'none')" />
+					<th th:replace="fragments :: column_link('approved', 'Approved', 'none')" />
+					<th class="hideable-column">Answered</th>					
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question : ${listQuestions}">
+					<td th:text="${question.id}">ID</td>
+					<td>
+						<a th:href="@{'/p/' + ${question.product.alias}}" target="_blank" class="link-product-detail" title="View Product Detail">[[${question.product.shortName}]]</a>
+					</td>
+					<td>[[${question.questionContent}]]</td>
+					<td>[[${question.askTime}]]</td>
+                     <td>
+						<span class="fas fa-2x"	th:classappend="${question.approved ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
+                      </td>
+					<td class="hideable-column">
+						<span class="fas fa-2x"	th:classappend="${question.answered ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
+					</td>					
+
+					<td>
+						<a class="fas fa-file-alt fa-2x icon-green link-detail" th:href="@{'/questions/detail/' + ${question.id}}" title="View details of this question"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="less-details">
+		<div th:each="question : ${listQuestions}" class="row m-1">
+			<div class="col-2">
+				<span>[[${question.id}]]</span>
+			</div>
+			<div class="col-10">
+				<div class="mb-1">
+					<a th:href="@{'/p/' + ${question.product.alias}}" target="_blank" title="View Product Details">[[${question.product.shortName}]]</a>
+				</div>
+
+				<div class="mb-1">
+					<span><i>[[${question.questionContent}]]</i></span>
+				</div>
+				<div class="mb-1">
+					&nbsp;
+					<small><div th:replace="fragments :: format_time(${question.askTime})"></div></small>
+					&nbsp;
+				</div>
+				<div>
+					<a class="fas fa-file-alt fa-2x icon-green link-detail"
+						th:href="@{'/questions/detail/' + ${question.id}}"
+						title="View details of this question"
+						></a>
+					&nbsp;
+					<span class="fas fa-2x"	th:classappend="${question.approved ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
+				</div>
+			</div>
+			<div>&nbsp;</div>
+		</div>	
+	</div>		
+
+	<div th:replace="fragments :: pagination('/questions', 'questions')"></div>
+
+	<div class="modal fade" id="questionDetailModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>	
+
+	<div th:replace="navigation :: footer_menu"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+	moduleURL = "[[@{/questions}]]";
+	
+	$(document).ready(function() {
+		handleDetailLink(".link-detail", "#questionDetailModal");
+	});
+	
+	
+</script>
+</body>
+</html> 
