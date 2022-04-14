@@ -32,4 +32,4 @@ Modules you will learn to build in the Shopping application: categories listing,
 ### PostScript
 
 - I learned this course from udemy.This is website link - https://www.udemy.com/course/spring-boot-e-commerce-ultimate/
-- I highly recommend this couerse who want to master practical programming skills needed to be a professional Java developer and pursuit a career in software development.
+- I highly recommend this course who want to master practical programming skills needed to be a professional Java developer and pursuit a career in software development.
