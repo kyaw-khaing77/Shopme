@@ -1,5 +1,5 @@
 ## Shopme
-   program a real-life shopping application using the latest technologies such as Java, Spring Boot, Hibernate, Thymeleaf, Bootstrap, jQuery, HTML, RESTful Webservices... putting all these pieces together for building professional applications beloved by the end users, and bring revenue to businesses.
+   This is a real-life shopping application using the latest technologies such as Java, Spring Boot, Hibernate, Thymeleaf, Bootstrap, jQuery, HTML, RESTful Webservices... putting all these pieces together for building professional applications beloved by the end users, and bring revenue to businesses.
 
 Modules you will learn to build in the Admin application: Users, Categories, Brands, Products, Customers, Shipping, Orders, Sales Report, Reviews, Questions, Settings.
 
